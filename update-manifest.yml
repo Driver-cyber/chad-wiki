@@ -1,0 +1,96 @@
+name: Update manifest
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**/*.md'
+      - '.github/workflows/update-manifest.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update-manifest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Regenerate manifest.json
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, re
+          from pathlib import Path
+
+          CANONICAL_URL = 'https://chadwiki.chadstewartcpa.com'
+
+          # Hardcoded purposes for v1. When adding a new .md file at the wiki root,
+          # add an entry here so the manifest carries a meaningful purpose string.
+          PURPOSES = {
+              'map.md': 'Navigation entry point and orientation for stranded sessions',
+              'orientation.md': 'User-level orientation: who Chad is and how we work',
+          }
+
+          frontmatter_re = re.compile(r'^---\s*\n(.*?)\n---\s*\n', re.DOTALL)
+
+          def parse_frontmatter(text):
+              m = frontmatter_re.match(text)
+              if not m:
+                  return {}
+              meta = {}
+              for line in m.group(1).splitlines():
+                  if ':' not in line:
+                      continue
+                  k, v = line.split(':', 1)
+                  meta[k.strip()] = v.strip().strip('"\'')
+              return meta
+
+          files = []
+          for path in sorted(Path('.').glob('*.md')):
+              text = path.read_text(encoding='utf-8')
+              meta = parse_frontmatter(text)
+              files.append({
+                  'name': path.name,
+                  'url': f'{CANONICAL_URL}/{path.name}',
+                  'version': meta.get('version', '0.0.0'),
+                  'last-updated': meta.get('last-updated', ''),
+                  'purpose': PURPOSES.get(path.name, ''),
+              })
+
+          wiki_version = next(
+              (f['version'] for f in files if f['name'] == 'map.md'),
+              files[0]['version'] if files else '0.0.0',
+          )
+          last_updated = max(
+              (f['last-updated'] for f in files if f['last-updated']),
+              default='',
+          )
+
+          manifest = {
+              'wiki_name': 'chad-wiki',
+              'wiki_version': wiki_version,
+              'last-updated': last_updated,
+              'canonical_url': CANONICAL_URL,
+              'files': files,
+          }
+
+          Path('manifest.json').write_text(
+              json.dumps(manifest, indent=2) + '\n',
+              encoding='utf-8',
+          )
+          PY
+
+      - name: Commit and push if changed
+        shell: bash
+        run: |
+          if git diff --quiet manifest.json; then
+            echo 'manifest.json unchanged, nothing to commit.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add manifest.json
+          git commit -m 'chore: regenerate manifest.json'
+          git push

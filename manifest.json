@@ -1,0 +1,22 @@
+{
+  "wiki_name": "chad-wiki",
+  "wiki_version": "1.0.0",
+  "last-updated": "2026-04-29",
+  "canonical_url": "https://chadwiki.chadstewartcpa.com",
+  "files": [
+    {
+      "name": "map.md",
+      "url": "https://chadwiki.chadstewartcpa.com/map.md",
+      "version": "1.0.0",
+      "last-updated": "2026-04-29",
+      "purpose": "Navigation entry point and orientation for stranded sessions"
+    },
+    {
+      "name": "orientation.md",
+      "url": "https://chadwiki.chadstewartcpa.com/orientation.md",
+      "version": "1.0.0",
+      "last-updated": "2026-04-29",
+      "purpose": "User-level orientation: who Chad is and how we work"
+    }
+  ]
+}

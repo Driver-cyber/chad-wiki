@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chad-Wiki</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; max-width: 760px; margin: 2rem auto; padding: 0 1.25rem; line-height: 1.6; color: #222; }
+  pre { background: #f4f4f4; padding: 0.75rem; overflow-x: auto; border-radius: 4px; }
+  code { background: #f4f4f4; padding: 0.1rem 0.3rem; border-radius: 3px; }
+  pre code { background: none; padding: 0; }
+  table { border-collapse: collapse; }
+  th, td { border: 1px solid #ddd; padding: 0.4rem 0.6rem; }
+  blockquote { border-left: 4px solid #ddd; padding-left: 1rem; color: #555; margin-left: 0; }
+  a { color: #0a58ca; }
+  hr { border: none; border-top: 1px solid #ddd; }
+</style>
+</head>
+<body>
+<main id="content">Loading…</main>
+<script>
+  const params = new URLSearchParams(location.search);
+  const doc = params.get('doc') || location.hash.replace(/^#/, '') || 'map.md';
+  fetch(doc).then(r => r.ok ? r.text() : Promise.reject(r.status))
+    .then(md => {
+      document.getElementById('content').innerHTML = marked.parse(md);
+      document.title = 'Chad-Wiki — ' + doc;
+      document.querySelectorAll('#content a').forEach(a => {
+        const href = a.getAttribute('href') || '';
+        if (href.endsWith('.md') && !/^https?:/i.test(href)) {
+          a.href = '?doc=' + href.replace(/^\.?\//, '');
+        }
+      });
+    })
+    .catch(err => {
+      document.getElementById('content').innerHTML = '<p>Failed to load <code>' + doc + '</code>: ' + err + '</p>';
+    });
+</script>
+</body>
+</html>
