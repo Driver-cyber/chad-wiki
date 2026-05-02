@@ -1,6 +1,6 @@
 ---
-version: 1.0.0
-last-updated: 2026-04-29
+version: 1.1.0
+last-updated: 2026-05-02
 ---
 
 # Chad-Wiki
@@ -32,10 +32,20 @@ file, you're in the right place.
 
 ## Files in this wiki
 
+### Foundations
+
 | File | Purpose |
 |---|---|
 | `map.md` | This file. Navigation entry point and orientation for stranded sessions. |
 | `orientation.md` | User-level orientation: who Chad is and how we work. |
+
+### Process and protocols
+
+| File | Purpose |
+|---|---|
+| `collaboration-patterns.md` | Process patterns for multi-step work: detect → propose → confirm, measure twice, single source. |
+| `session-end-protocol.md` | Canonical end-of-session ritual: Inbox sweep, tracker update, learned-log append, commit and push. |
+| `project-checklist.md` | Required and recommended artifacts that make a project "fully equipped" for the protocol. |
 
 ## When wiki access fails
 
@@ -76,4 +86,7 @@ This file is the navigation hub; it's where you look first.
 
 ## Changelog
 
+- **1.1.0 (2026-05-02):** Added Process and protocols section —
+  `collaboration-patterns.md`, `session-end-protocol.md`,
+  `project-checklist.md`.
 - **1.0.0 (2026-04-29):** Initial wiki version with map and orientation.
