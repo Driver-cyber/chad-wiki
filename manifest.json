@@ -1,7 +1,7 @@
 {
   "wiki_name": "chad-wiki",
-  "wiki_version": "1.1.0",
-  "last-updated": "2026-05-02",
+  "wiki_version": "1.2.0",
+  "last-updated": "2026-05-06",
   "canonical_url": "https://chadwiki.chadstewartcpa.com",
   "files": [
     {
@@ -12,10 +12,17 @@
       "purpose": "Process patterns for multi-step work: detect-propose-confirm, measure twice, single source"
     },
     {
+      "name": "inbox-source.md",
+      "url": "https://chadwiki.chadstewartcpa.com/inbox-source.md",
+      "version": "1.0.0",
+      "last-updated": "2026-05-06",
+      "purpose": ""
+    },
+    {
       "name": "map.md",
       "url": "https://chadwiki.chadstewartcpa.com/map.md",
-      "version": "1.1.0",
-      "last-updated": "2026-05-02",
+      "version": "1.2.0",
+      "last-updated": "2026-05-06",
       "purpose": "Navigation entry point and orientation for stranded sessions"
     },
     {
@@ -35,8 +42,8 @@
     {
       "name": "session-end-protocol.md",
       "url": "https://chadwiki.chadstewartcpa.com/session-end-protocol.md",
-      "version": "1.0.0",
-      "last-updated": "2026-05-02",
+      "version": "1.1.0",
+      "last-updated": "2026-05-06",
       "purpose": "Canonical session-end protocol: Inbox sweep, tracker update, learned-log append, commit and push"
     }
   ]
