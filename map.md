@@ -1,6 +1,6 @@
 ---
-version: 1.1.0
-last-updated: 2026-05-02
+version: 1.2.0
+last-updated: 2026-05-06
 ---
 
 # Chad-Wiki
@@ -46,6 +46,7 @@ file, you're in the right place.
 | `collaboration-patterns.md` | Process patterns for multi-step work: detect → propose → confirm, measure twice, single source. |
 | `session-end-protocol.md` | Canonical end-of-session ritual: Inbox sweep, tracker update, learned-log append, commit and push. |
 | `project-checklist.md` | Required and recommended artifacts that make a project "fully equipped" for the protocol. |
+| `inbox-source.md` | Spec for the shared Inbox: endpoint, JSON shape, required User-Agent, PATCH semantics. Used by the session-end protocol's step 1. |
 
 ## When wiki access fails
 
@@ -86,6 +87,9 @@ This file is the navigation hub; it's where you look first.
 
 ## Changelog
 
+- **1.2.0 (2026-05-06):** Added `inbox-source.md` under Process and
+  protocols — canonical spec for the shared Inbox read/write mechanism,
+  used by the session-end protocol's step 1.
 - **1.1.0 (2026-05-02):** Added Process and protocols section —
   `collaboration-patterns.md`, `session-end-protocol.md`,
   `project-checklist.md`.
